@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.DS_Store
+
+# Interne Notizen (Briefing mit privaten Angaben), nicht veröffentlichen
+docs/

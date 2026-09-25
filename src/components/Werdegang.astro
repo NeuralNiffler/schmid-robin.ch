@@ -1,0 +1,121 @@
+---
+import { siteConfig } from "../site.config";
+
+/** Nur Highlights. Der vollständige Werdegang steht auf LinkedIn. */
+const beruf = [
+  {
+    zeitraum: "2022–2025",
+    titel: "Product Owner",
+    ort: "Carvolution",
+    text: "Fachlich verantwortlich für Datenqualität und Prozesslogik des internen ERP-nahen Kernsystems mit über 80 Nutzenden in vier Fachbereichen. Operatives Dashboard mit automatisierten Alerts auf rund zehn Finanzkennzahlen.",
+  },
+  {
+    zeitraum: "2019–2021",
+    titel: "Software Engineer Fullstack",
+    ort: "Carvolution",
+    text: "Java/Spring Boot, Angular und SQL am Kernsystem. Architektur, Schnittstellen und Datenflüsse zwischen Drittsystemen und dem eigenen ERP-ähnlichen System.",
+  },
+  {
+    zeitraum: "2017–2019",
+    titel: "Application Engineer, Bereich Finanzieren",
+    ort: "Basler Kantonalbank",
+    text: "Analyse und Bereitstellung strukturierter Daten für fachspezifische Reports im Finanzumfeld.",
+  },
+];
+
+const ausbildung = [
+  { zeitraum: "seit 2025", titel: "Studium BSc Data Science & AI", ort: "FHNW" },
+  { zeitraum: "2014–2017", titel: "BSc Wirtschaftsinformatik", ort: "FHNW" },
+  { zeitraum: "2019", titel: "Professional Scrum Master (PSM I)", ort: "Scrum.org" },
+];
+---
+
+<section class="werdegang container" id="werdegang" aria-labelledby="werdegang-titel">
+  <h2 id="werdegang-titel">Werdegang</h2>
+  <div class="spalten">
+    <div>
+      <h3 class="eyebrow">Beruf</h3>
+      <ol class="liste">
+        {
+          beruf.map((b) => (
+            <li>
+              <span class="zeit">{b.zeitraum}</span>
+              <div>
+                <strong>{b.titel}</strong>, {b.ort}
+                <p>{b.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div>
+      <h3 class="eyebrow">Ausbildung</h3>
+      <ol class="liste">
+        {
+          ausbildung.map((a) => (
+            <li>
+              <span class="zeit">{a.zeitraum}</span>
+              <div>
+                <strong>{a.titel}</strong>, {a.ort}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+  <p class="linkedin">
+    Den vollständigen Werdegang gibt es auf <a href={siteConfig.links.linkedin} rel="me">LinkedIn</a>.
+  </p>
+</section>
+
+<style>
+  .werdegang {
+    padding-top: 4rem;
+  }
+  h2 {
+    font-size: 2rem;
+    margin: 0 0 2rem;
+  }
+  .spalten {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 56rem) {
+    .spalten {
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+    }
+  }
+  .liste {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .liste li {
+    display: grid;
+    gap: 0.25rem;
+  }
+  @media (min-width: 40rem) {
+    .liste li {
+      grid-template-columns: 6.5rem 1fr;
+      gap: 1rem;
+    }
+  }
+  .zeit {
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+  .liste p {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+  }
+  .linkedin {
+    margin-top: 2.5rem;
+    color: var(--muted);
+  }
+</style>

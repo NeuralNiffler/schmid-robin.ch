@@ -1,0 +1,46 @@
+---
+import { siteConfig } from "../site.config";
+---
+
+<header class="site-header">
+  <div class="container inner">
+    <a class="brand" href="/">{siteConfig.name}</a>
+    <nav aria-label="Hauptnavigation">
+      <a href="/#projekte">Projekte</a>
+      <a href="/#werdegang">Werdegang</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.5rem;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9375rem;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav a:hover {
+    color: var(--accent);
+  }
+</style>

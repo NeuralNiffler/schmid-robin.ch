@@ -1,0 +1,94 @@
+---
+interface Props {
+  titel: string;
+  stufen: readonly { titel: string; text: string }[];
+}
+
+const { titel, stufen } = Astro.props;
+---
+
+<figure class="pipeline">
+  <ol>
+    {
+      stufen.map((stufe, i) => (
+        <li>
+          <span class="nr">{i + 1}</span>
+          <strong>{stufe.titel}</strong>
+          <span class="text">{stufe.text}</span>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption>{titel}</figcaption>
+</figure>
+
+<style>
+  .pipeline {
+    margin: 0;
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.75rem;
+  }
+  @media (min-width: 40rem) {
+    ol {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  li {
+    position: relative;
+    display: grid;
+    gap: 0.125rem;
+    padding: 0.75rem 0.875rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  /* Pfeil zur nächsten Stufe: nach unten auf dem Handy, nach rechts ab Tablet */
+  li:not(:last-child)::after {
+    content: "↓";
+    position: absolute;
+    left: 50%;
+    bottom: -1.5rem;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  @media (min-width: 40rem) {
+    li:not(:last-child)::after {
+      content: "→";
+      left: auto;
+      right: -1.5rem;
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .nr {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  strong {
+    font-family: var(--serif);
+    font-weight: 600;
+  }
+  .text {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  figcaption {
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+</style>

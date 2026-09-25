@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+import { siteConfig } from "../site.config";
+---
+
+<Base title="Impressum und Datenschutz" description="Impressum und Datenschutzhinweis von schmid-robin.ch">
+  <article class="container text">
+    <h1>Impressum und Datenschutz</h1>
+
+    <h2>Verantwortlich</h2>
+    <p>
+      {siteConfig.name}<br />
+      {siteConfig.ort}<br />
+      <a href={`mailto:${siteConfig.links.email}`}>{siteConfig.links.email}</a>
+    </p>
+
+    <h2>Datenschutz</h2>
+    <p>
+      Diese Seite setzt keine Cookies, verwendet kein Tracking und keine Analysedienste und lädt keine Inhalte von
+      Drittanbietern. Schriften werden von dieser Domain ausgeliefert.
+    </p>
+    <p>
+      Die Seite wird über Cloudflare ausgeliefert. Dabei verarbeitet Cloudflare technisch notwendige Verbindungsdaten
+      wie die IP-Adresse, um die Seite auszuliefern und vor Missbrauch zu schützen. Weitere Informationen stehen in der
+      <a href="https://www.cloudflare.com/privacypolicy/">Datenschutzerklärung von Cloudflare</a>.
+    </p>
+    <p>
+      Wer per E-Mail Kontakt aufnimmt, dessen Angaben verwende ich nur, um die Anfrage zu beantworten.
+    </p>
+
+    <h2>Haftung für Links</h2>
+    <p>Für die Inhalte verlinkter externer Seiten sind deren Betreiber verantwortlich.</p>
+  </article>
+</Base>
+
+<style>
+  .text {
+    max-width: 42rem;
+    padding-top: 3rem;
+  }
+  h1 {
+    font-size: 2.25rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+</style>

@@ -1,0 +1,14 @@
+{
+  // Statische Seite (Astro-Output) über Workers Static Assets.
+  // Der Name muss mit dem Projektnamen in Cloudflare (Workers & Pages) übereinstimmen,
+  // sonst schlägt der Build mit "name mismatch" fehl.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "schmid-robin-ch",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  // Custom Domain: Cloudflare legt den DNS-Eintrag selbst an.
+  "routes": [{ "pattern": "schmid-robin.ch", "custom_domain": true }]
+}

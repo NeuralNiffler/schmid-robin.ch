@@ -1,0 +1,54 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Werdegang from "../components/Werdegang.astro";
+import { getProjekte } from "../lib";
+
+const projekte = await getProjekte();
+---
+
+<Base>
+  <Hero />
+  <section class="projekte container" id="projekte" aria-labelledby="projekte-titel">
+    <h2 id="projekte-titel">Projekte</h2>
+    <p class="intro">
+      Eine Auswahl aus Beruf, Studium und eigenen Vorhaben. Der rote Faden: Daten sauber von A nach B bringen und
+      prüfen, ob sie stimmen.
+    </p>
+    <div class="grid">
+      {projekte.map((p) => <ProjectCard projekt={p} />)}
+    </div>
+  </section>
+  <Werdegang />
+</Base>
+
+<style>
+  .projekte {
+    padding-top: 3rem;
+    border-top: 1px solid var(--line);
+  }
+  h2 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem;
+  }
+  .intro {
+    color: var(--muted);
+    max-width: 40rem;
+    margin: 0 0 2rem;
+  }
+  .grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 40rem) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 64rem) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

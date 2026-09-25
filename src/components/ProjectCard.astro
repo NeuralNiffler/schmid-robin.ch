@@ -1,0 +1,99 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  projekt: CollectionEntry<"projects">;
+}
+
+const { projekt } = Astro.props;
+const { titel, kurz, kontext, zeitraum, stack, bild, bildAlt, featured } = projekt.data;
+const href = `/projekte/${projekt.id}/`;
+---
+
+<article class:list={["card", { featured }]}>
+  {
+    bild && (
+      <img class="bild" src={bild} alt={bildAlt ?? ""} loading="lazy" decoding="async" width="800" height="450" />
+    )
+  }
+  <div class="body">
+    <p class="meta">
+      <span class="badge">{kontext}</span>
+      <span>{zeitraum}</span>
+    </p>
+    <h3><a href={href}>{titel}</a></h3>
+    <p class="kurz">{kurz}</p>
+    <ul class="tags" aria-label="Stack">
+      {stack.map((s) => <li>{s}</li>)}
+    </ul>
+    <span class="mehr" aria-hidden="true">Details →</span>
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .card:hover,
+  .card:focus-within {
+    border-color: var(--accent);
+  }
+  .bild {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-bottom: 1px solid var(--line);
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    flex: 1;
+  }
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.3125rem;
+  }
+  .featured h3 {
+    font-size: 1.5rem;
+  }
+  h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  /* Ganze Karte klickbar, ohne verschachtelte Links */
+  h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .kurz {
+    margin: 0;
+    color: var(--muted);
+  }
+  .tags {
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+  .mehr {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+</style>

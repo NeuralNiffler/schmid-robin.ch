@@ -1,0 +1,44 @@
+---
+import Pipeline from "./diagramme/Pipeline.astro";
+
+interface Props {
+  name: "5000ratshuus" | "bc365" | "cowork";
+}
+
+/**
+ * Einfache Fluss-Schemas für Projekte ohne sinnvollen Screenshot.
+ * Jede Stufe: Titel und kurze Zeile darunter.
+ */
+const schemas = {
+  "5000ratshuus": {
+    titel: "Ablauf vom Newsletter zum Artikel",
+    stufen: [
+      { titel: "Newsletter", text: "E-Mail der Stadt" },
+      { titel: "Worker", text: "prüft Absender und Inhalt" },
+      { titel: "GitHub Action", text: "Artikel mit Claude" },
+      { titel: "Cloudflare", text: "Build und Deploy" },
+    ],
+  },
+  bc365: {
+    titel: "Datenfluss vor und nach der Migration",
+    stufen: [
+      { titel: "Kernsystem", text: "eigenes ERP-nahes System" },
+      { titel: "Schnittstelle", text: "XML-Files → REST-API" },
+      { titel: "Buchhaltung", text: "Navision on-prem → BC365 SaaS" },
+    ],
+  },
+  cowork: {
+    titel: "Beispiel: Zeiterfassungsabgleich",
+    stufen: [
+      { titel: "Quellen", text: "Slack, Gmail, Kalender" },
+      { titel: "Skill", text: "fasst Aktivitäten zusammen" },
+      { titel: "Abgleich", text: "mit Jira-Buchungen" },
+      { titel: "Vorschlag", text: "Buchung pro Ticket" },
+    ],
+  },
+} as const;
+
+const schema = schemas[Astro.props.name];
+---
+
+<Pipeline titel={schema.titel} stufen={schema.stufen} />

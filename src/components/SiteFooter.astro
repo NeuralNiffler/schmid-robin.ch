@@ -1,0 +1,55 @@
+---
+import { siteConfig } from "../site.config";
+const { email, linkedin, github } = siteConfig.links;
+---
+
+<footer class="site-footer" id="kontakt">
+  <div class="container inner">
+    <div>
+      <h2>Kontakt</h2>
+      <p>Am einfachsten per E-Mail oder über LinkedIn.</p>
+      <ul class="links">
+        <li><a href={`mailto:${email}`}>{email}</a></li>
+        <li><a href={linkedin} rel="me">LinkedIn</a></li>
+        <li><a href={github} rel="me">GitHub</a></li>
+      </ul>
+    </div>
+    <p class="meta">
+      {siteConfig.name}, {siteConfig.ort} · <a href="/impressum/">Impressum und Datenschutz</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 5rem;
+    padding: 3rem 0 2rem;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .inner {
+    display: grid;
+    gap: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+  }
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-weight: 600;
+  }
+  .meta {
+    font-size: 0.875rem;
+    margin: 0;
+  }
+</style>
