@@ -15,8 +15,8 @@ const hatPortrait = existsSync(new URL(`../../public${siteConfig.portrait}`, imp
     {siteConfig.profil.map((absatz) => <p class="profil">{absatz}</p>)}
     <ul class="actions">
       <li><a class="button button--primary" href="#projekte">Projekte ansehen</a></li>
-      <li><a class="button" href={linkedin} rel="me">LinkedIn</a></li>
-      <li><a class="button" href={github} rel="me">GitHub</a></li>
+      <li><a class="button" href={linkedin} target="_blank" rel="me noopener">LinkedIn</a></li>
+      <li><a class="button" href={github} target="_blank" rel="me noopener">GitHub</a></li>
       <li><a class="button" href={`mailto:${email}`}>E-Mail</a></li>
     </ul>
   </div>
