@@ -19,7 +19,7 @@ export const siteConfig = {
   ],
   ort: "Aarau, Schweiz",
   /** Foto unter public/. Fehlt die Datei, zeigt der Einstieg einen Platzhalter mit Initialen. */
-  portrait: "/portrait.jpg",
+  portrait: "/portrait.png",
   links: {
     email: "kontakt@schmid-robin.ch",
     linkedin: "https://www.linkedin.com/in/robin-schmid-b7857a28b",

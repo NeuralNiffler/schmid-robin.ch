@@ -6,3 +6,4 @@ dist/
 
 # Interne Notizen (Briefing mit privaten Angaben), nicht veröffentlichen
 docs/
+.idea/
