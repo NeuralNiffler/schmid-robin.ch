@@ -2,31 +2,129 @@
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import Werdegang from "../components/Werdegang.astro";
-import { getProjekte } from "../lib";
+import Kpi from "../components/dashboard/Kpi.astro";
+import Gantt from "../components/dashboard/Gantt.astro";
+import StackChart from "../components/dashboard/StackChart.astro";
+import WerdegangDetails from "../components/dashboard/WerdegangDetails.astro";
+import { getProjekte, getKennzahlen, kontexte } from "../lib";
 
 const projekte = await getProjekte();
+const kennzahlen = getKennzahlen(projekte);
+const filter = [
+  { wert: "alle", label: "Alle", anzahl: projekte.length },
+  ...kontexte.map((k) => ({ wert: k, label: k, anzahl: projekte.filter((p) => p.data.kontext === k).length })),
+].filter((f) => f.anzahl > 0);
 ---
 
 <Base>
-  <Hero />
-  <section class="projekte container" id="projekte" aria-labelledby="projekte-titel">
-    <h2 id="projekte-titel">Projekte</h2>
-    <p class="intro">
-      Eine Auswahl aus Beruf, Studium und eigenen Vorhaben. Der rote Faden: Daten sauber von A nach B bringen und
-      prüfen, ob sie stimmen.
-    </p>
-    <div class="grid">
-      {projekte.map((p) => <ProjectCard projekt={p} />)}
+  <div class="dashboard container">
+    <Hero />
+
+    <section class="kpis" aria-label="Kennzahlen">
+      {kennzahlen.map((k) => <Kpi {...k} />)}
+    </section>
+
+    <div class="charts">
+      <Gantt />
+      <StackChart projekte={projekte} />
     </div>
-  </section>
-  <Werdegang />
+
+    <WerdegangDetails />
+
+    <section class="projekte" id="projekte" aria-labelledby="projekte-titel">
+      <div class="projekte-kopf">
+        <div>
+          <p class="eyebrow mono">projekte/</p>
+          <h2 id="projekte-titel">Projekte</h2>
+          <p class="intro">
+            Eine Auswahl aus Beruf, Studium und eigenen Vorhaben. Der rote Faden: Daten sauber von A nach B bringen und
+            prüfen, ob sie stimmen.
+          </p>
+        </div>
+        <div class="filter" role="group" aria-label="Projekte filtern" hidden>
+          {
+            filter.map((f, i) => (
+              <button type="button" data-filter={f.wert} data-kontext={f.wert} aria-pressed={i === 0 ? "true" : "false"}>
+                {f.label} <span class="mono">{f.anzahl}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <ul class="grid">
+        {
+          projekte.map((p, i) => (
+            <li data-kontext={p.data.kontext}>
+              <ProjectCard projekt={p} nr={i + 1} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
 </Base>
 
+<script>
+  // Filter nur mit JS einblenden; ohne JS sind einfach alle Projekte sichtbar.
+  const gruppe = document.querySelector<HTMLElement>(".filter");
+  if (gruppe) {
+    gruppe.hidden = false;
+    const knoepfe = gruppe.querySelectorAll<HTMLButtonElement>("button");
+    const karten = document.querySelectorAll<HTMLElement>(".projekte .grid > li");
+    knoepfe.forEach((knopf) =>
+      knopf.addEventListener("click", () => {
+        const wert = knopf.dataset.filter;
+        knoepfe.forEach((k) => k.setAttribute("aria-pressed", String(k === knopf)));
+        karten.forEach((karte) => (karte.hidden = wert !== "alle" && karte.dataset.kontext !== wert));
+      }),
+    );
+  }
+</script>
+
 <style>
+  .dashboard {
+    display: grid;
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+  @media (min-width: 48rem) {
+    .dashboard {
+      padding-top: 2rem;
+    }
+  }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (min-width: 56rem) {
+    .kpis {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .charts {
+    display: grid;
+    gap: 1rem;
+  }
+  .charts > :global(*) {
+    height: 100%;
+  }
+  @media (min-width: 64rem) {
+    .charts {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
   .projekte {
-    padding-top: 3rem;
-    border-top: 1px solid var(--line);
+    padding-top: 2.5rem;
+    scroll-margin-top: 1rem;
+  }
+  .projekte-kopf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-bottom: 1.5rem;
   }
   h2 {
     font-size: 2rem;
@@ -35,11 +133,55 @@ const projekte = await getProjekte();
   .intro {
     color: var(--muted);
     max-width: 40rem;
-    margin: 0 0 2rem;
+    margin: 0;
+  }
+  .filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .filter[hidden] {
+    display: none;
+  }
+  .filter button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.375rem 0.75rem;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .filter button::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 2px;
+    background: var(--k, var(--ink));
+  }
+  .filter button span {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .filter button:hover {
+    border-color: var(--k, var(--ink));
+  }
+  .filter button[aria-pressed="true"] {
+    border-color: var(--k, var(--ink));
+    box-shadow: inset 0 0 0 1px var(--k, var(--ink));
   }
   .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
   }
   @media (min-width: 40rem) {
     .grid {

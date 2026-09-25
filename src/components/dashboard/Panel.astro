@@ -1,0 +1,22 @@
+---
+interface Props {
+  /** Kurzer Titel in der Kopfzeile, im Stil eines Dateinamens, z. B. "werdegang.gantt". */
+  titel: string;
+  id?: string;
+  class?: string;
+  /** Innenabstand im Inhalt. Aus für Inhalte, die bis an den Rand gehen (z. B. Bild). */
+  padding?: boolean;
+}
+
+const { titel, id, class: klasse, padding = true } = Astro.props;
+---
+
+<section class:list={["panel", klasse]} id={id} aria-label={titel}>
+  <div class="panel__title">
+    <span>{titel}</span>
+    <slot name="aktion" />
+  </div>
+  <div class:list={[{ panel__body: padding }]}>
+    <slot />
+  </div>
+</section>

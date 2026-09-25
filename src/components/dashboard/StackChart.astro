@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getTechnologien, kontexte } from "../../lib";
+import Panel from "./Panel.astro";
+import Legende from "./Legende.astro";
+
+interface Props {
+  projekte: CollectionEntry<"projects">[];
+}
+
+const daten = getTechnologien(Astro.props.projekte);
+const max = Math.max(...daten.map((d) => d.total));
+---
+
+<Panel titel="technologien.häufigkeit" class="stack">
+  <h2 class="titel">Meistgenutzte Technologien</h2>
+  <p class="sub">Anzahl Berufsstationen und Projekte, in denen eine Technologie vorkommt</p>
+  <Legende />
+  <ol class="balken">
+    {
+      daten.map((d) => (
+        <li>
+          <span class="tool" title={d.tools.join(", ")}>{d.familie}</span>
+          <span class="spur" style={`--anteil: ${(d.total / max) * 100}%`}>
+            <span class="stapel">
+              {kontexte
+                .filter((k) => d.jeKontext[k] > 0)
+                .map((k) => (
+                  <span
+                    class="segment"
+                    data-kontext={k}
+                    style={`flex: ${d.jeKontext[k]}`}
+                    title={`${d.familie}: ${d.jeKontext[k]} × ${k}`}
+                  />
+                ))}
+            </span>
+            <span class="wert mono">{d.total}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <table class="visually-hidden">
+    <caption>Technologien nach Anzahl Berufsstationen und Projekte, je Kontext</caption>
+    <thead>
+      <tr><th>Technologie</th>{kontexte.map((k) => <th>{k}</th>)}<th>Total</th></tr>
+    </thead>
+    <tbody>
+      {daten.map((d) => <tr><th>{d.familie}</th>{kontexte.map((k) => <td>{d.jeKontext[k]}</td>)}<td>{d.total}</td></tr>)}
+    </tbody>
+  </table>
+</Panel>
+
+<style>
+  .titel {
+    font-size: 1.125rem;
+    margin: 0;
+  }
+  .sub {
+    margin: 0.125rem 0 0.75rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .balken {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 10.5rem 1fr;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .tool {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .spur {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .stapel {
+    display: flex;
+    gap: 2px;
+    width: calc(var(--anteil) - 1.5rem);
+    min-width: 0.75rem;
+    height: 0.875rem;
+  }
+  .segment {
+    background: var(--k);
+  }
+  .segment:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  .segment:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .segment:hover {
+    opacity: 0.8;
+  }
+  .wert {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+</style>

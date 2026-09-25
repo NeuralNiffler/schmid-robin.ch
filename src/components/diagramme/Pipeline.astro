@@ -28,7 +28,7 @@ const { titel, stufen } = Astro.props;
     padding: 1.25rem;
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    background: var(--accent-soft);
+    background: var(--bg);
   }
   ol {
     list-style: none;
@@ -51,6 +51,7 @@ const { titel, stufen } = Astro.props;
     padding: 0.75rem 0.875rem;
     background: var(--surface);
     border: 1px solid var(--line);
+    border-top: 3px solid var(--k, var(--accent));
     border-radius: 8px;
   }
   /* Pfeil zur nächsten Stufe: nach unten auf dem Handy, nach rechts ab Tablet */
@@ -60,7 +61,7 @@ const { titel, stufen } = Astro.props;
     left: 50%;
     bottom: -1.5rem;
     transform: translateX(-50%);
-    color: var(--accent);
+    color: var(--k, var(--accent));
     font-weight: 600;
   }
   @media (min-width: 40rem) {
@@ -74,9 +75,10 @@ const { titel, stufen } = Astro.props;
     }
   }
   .nr {
+    font-family: var(--mono);
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--muted);
   }
   strong {
     font-family: var(--serif);
@@ -88,6 +90,7 @@ const { titel, stufen } = Astro.props;
   }
   figcaption {
     margin-top: 1rem;
+    font-family: var(--mono);
     font-size: 0.8125rem;
     color: var(--muted);
   }

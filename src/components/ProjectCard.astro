@@ -3,30 +3,33 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   projekt: CollectionEntry<"projects">;
+  /** Laufnummer für die Kopfzeile, beginnend bei 1. */
+  nr: number;
 }
 
-const { projekt } = Astro.props;
+const { projekt, nr } = Astro.props;
 const { titel, kurz, kontext, zeitraum, stack, bild, bildAlt, featured } = projekt.data;
 const href = `/projekte/${projekt.id}/`;
 ---
 
-<article class:list={["card", { featured }]}>
+<article class:list={["card", { featured }]} data-kontext={kontext}>
+  <p class="kopf mono">
+    <span>P-{String(nr).padStart(2, "0")}</span>
+    <span class="badge">{kontext}</span>
+    <span class="zeitraum">{zeitraum}</span>
+  </p>
   {
     bild && (
       <img class="bild" src={bild} alt={bildAlt ?? ""} loading="lazy" decoding="async" width="800" height="450" />
     )
   }
   <div class="body">
-    <p class="meta">
-      <span class="badge">{kontext}</span>
-      <span>{zeitraum}</span>
-    </p>
     <h3><a href={href}>{titel}</a></h3>
     <p class="kurz">{kurz}</p>
     <ul class="tags" aria-label="Stack">
       {stack.map((s) => <li>{s}</li>)}
     </ul>
-    <span class="mehr" aria-hidden="true">Details →</span>
+    <span class="mehr mono" aria-hidden="true">details →</span>
   </div>
 </article>
 
@@ -35,15 +38,39 @@ const href = `/projekte/${projekt.id}/`;
     position: relative;
     display: flex;
     flex-direction: column;
+    height: 100%;
     background: var(--surface);
     border: 1px solid var(--line);
+    border-top: 3px solid var(--k);
     border-radius: var(--radius);
     overflow: hidden;
-    transition: border-color 0.15s;
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
   }
   .card:hover,
   .card:focus-within {
-    border-color: var(--accent);
+    border-color: var(--k);
+    transform: translateY(-2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover,
+    .card:focus-within {
+      transform: none;
+    }
+  }
+  .kopf {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0.5rem 1.25rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .zeitraum {
+    margin-left: auto;
   }
   .bild {
     width: 100%;
@@ -57,14 +84,6 @@ const href = `/projekte/${projekt.id}/`;
     gap: 0.75rem;
     padding: 1.25rem;
     flex: 1;
-  }
-  .meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 0;
-    font-size: 0.875rem;
-    color: var(--muted);
   }
   h3 {
     margin: 0;
@@ -92,7 +111,7 @@ const href = `/projekte/${projekt.id}/`;
     padding-top: 0.25rem;
   }
   .mehr {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     color: var(--accent);
   }

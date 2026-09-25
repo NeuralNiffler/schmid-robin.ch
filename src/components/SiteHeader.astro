@@ -1,10 +1,18 @@
 ---
 import { siteConfig } from "../site.config";
+
+// Brotkrümel im Stil eines Pfads: robin.schmid / übersicht bzw. / projekte / <slug>
+const teile = Astro.url.pathname.split("/").filter(Boolean);
+const pfad = teile.length ? teile : ["übersicht"];
+const kurzname = siteConfig.name.toLowerCase().replace(" ", ".");
 ---
 
 <header class="site-header">
   <div class="container inner">
-    <a class="brand" href="/">{siteConfig.name}</a>
+    <p class="brand mono">
+      <a href="/" aria-label={`${siteConfig.name}, Startseite`}>{kurzname}</a>
+      {pfad.map((t) => <span class="teil"><span aria-hidden="true"> / </span>{t}</span>)}
+    </p>
     <nav aria-label="Hauptnavigation">
       <a href="/#projekte">Projekte</a>
       <a href="/#werdegang">Werdegang</a>
@@ -24,17 +32,47 @@ import { siteConfig } from "../site.config";
     gap: 1rem;
     min-height: 3.5rem;
   }
+  .site-header {
+    background: var(--surface);
+  }
   .brand {
-    font-family: var(--serif);
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+  .brand a {
     font-weight: 600;
-    font-size: 1.125rem;
     color: var(--ink);
     text-decoration: none;
+  }
+  .brand a::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 2px;
+    background: linear-gradient(135deg, var(--c-beruf) 33%, var(--c-studium) 33% 66%, var(--c-privat) 66%);
+  }
+  /* Auf dem Handy nur den Namen zeigen, damit Brand und Navigation nebeneinander Platz haben */
+  @media (max-width: 30rem) {
+    .teil {
+      display: none;
+    }
+    nav {
+      gap: 0.75rem;
+      font-size: 0.875rem;
+    }
   }
   nav {
     display: flex;
     gap: 1rem;
     font-size: 0.9375rem;
+    flex-shrink: 0;
   }
   nav a {
     color: var(--muted);

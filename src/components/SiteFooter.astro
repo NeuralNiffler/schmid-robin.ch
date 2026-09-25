@@ -5,7 +5,9 @@ const { email, linkedin, github } = siteConfig.links;
 
 <footer class="site-footer" id="kontakt">
   <div class="container inner">
-    <div>
+    <div class="panel kontakt">
+      <p class="panel__title">kontakt</p>
+      <div class="panel__body">
       <h2>Kontakt</h2>
       <p>Am einfachsten per E-Mail oder über LinkedIn.</p>
       <ul class="links">
@@ -13,6 +15,7 @@ const { email, linkedin, github } = siteConfig.links;
         <li><a href={linkedin} target="_blank" rel="me noopener">LinkedIn</a></li>
         <li><a href={github} target="_blank" rel="me noopener">GitHub</a></li>
       </ul>
+      </div>
     </div>
     <p class="meta">
       {siteConfig.name}, {siteConfig.ort} · <a href="/impressum/">Impressum und Datenschutz</a>
@@ -22,10 +25,8 @@ const { email, linkedin, github } = siteConfig.links;
 
 <style>
   .site-footer {
-    margin-top: 5rem;
-    padding: 3rem 0 2rem;
-    border-top: 1px solid var(--line);
-    background: var(--surface);
+    margin-top: 1rem;
+    padding: 1rem 0 2rem;
   }
   .inner {
     display: grid;
@@ -36,7 +37,6 @@ const { email, linkedin, github } = siteConfig.links;
     margin: 0 0 0.5rem;
   }
   p {
-    margin: 0 0 1rem;
     color: var(--muted);
   }
   .links {
@@ -47,6 +47,13 @@ const { email, linkedin, github } = siteConfig.links;
     flex-wrap: wrap;
     gap: 0.5rem 1.5rem;
     font-weight: 600;
+  }
+  .kontakt .links {
+    font-family: var(--mono);
+    font-size: 0.9375rem;
+  }
+  .kontakt p:not(.panel__title) {
+    margin: 0 0 1rem;
   }
   .meta {
     font-size: 0.875rem;

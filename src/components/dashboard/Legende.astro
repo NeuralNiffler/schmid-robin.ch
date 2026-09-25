@@ -1,0 +1,31 @@
+---
+import { kontexte as alle } from "../../lib";
+import type { Kontext } from "../../data/werdegang";
+
+interface Props {
+  /** Nur die Kontexte, die im Chart tatsächlich vorkommen. Reihenfolge bleibt immer Beruf, Studium, privat. */
+  nur?: Kontext[];
+}
+
+const { nur } = Astro.props;
+const kontexte = nur ? alle.filter((k) => nur.includes(k)) : alle;
+---
+
+<ul class="legende" aria-label="Legende">
+  {kontexte.map((k) => <li class="badge" data-kontext={k}>{k}</li>)}
+</ul>
+
+<style>
+  .legende {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .legende li {
+    font-weight: 400;
+    color: var(--muted);
+  }
+</style>

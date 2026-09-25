@@ -18,6 +18,12 @@ export const siteConfig = {
     "Als Product Owner war ich fachlich verantwortlich für die Datenqualität eines operativen Kernsystems. Entscheidungen stütze ich auf eigene SQL-Analysen, und ich baue Monitorings für die Kennzahlen, die ein Unternehmen tatsächlich steuern.",
   ],
   ort: "Aarau, Schweiz",
+  /** Kennzahlen, die sich nicht aus den Daten der Seite ableiten lassen. Als Untergrenzen formuliert, damit sie nicht veralten. */
+  kennzahlen: {
+    arbeitsjahre: "10+",
+    projekteTotal: "20+",
+    nutzendeKernsystem: "80+",
+  },
   /** Foto unter public/. Fehlt die Datei, zeigt der Einstieg einen Platzhalter mit Initialen. */
   portrait: "/portrait.png",
   links: {

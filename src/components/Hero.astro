@@ -2,6 +2,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { siteConfig } from "../site.config";
+import Panel from "./dashboard/Panel.astro";
 
 const { email, linkedin, github } = siteConfig.links;
 // Foto ist optional: Liegt die Datei aus siteConfig.portrait in public/, erscheint sie automatisch.
@@ -9,9 +10,9 @@ const { email, linkedin, github } = siteConfig.links;
 const hatPortrait = existsSync(join(process.cwd(), "public", siteConfig.portrait));
 ---
 
-<section class="hero container">
-  <div class="text">
-    <p class="eyebrow">{siteConfig.ort}</p>
+<div class="hero">
+  <Panel titel="profil.md" class="profil-panel">
+    <p class="eyebrow mono">{siteConfig.ort}</p>
     <h1>{siteConfig.name}</h1>
     <p class="positionierung">{siteConfig.positionierung}</p>
     {siteConfig.profil.map((absatz) => <p class="profil">{absatz}</p>)}
@@ -21,32 +22,36 @@ const hatPortrait = existsSync(join(process.cwd(), "public", siteConfig.portrait
       <li><a class="button" href={github} target="_blank" rel="me noopener">GitHub</a></li>
       <li><a class="button" href={`mailto:${email}`}>E-Mail</a></li>
     </ul>
-  </div>
-  <div class="portrait" aria-hidden={hatPortrait ? undefined : "true"}>
-    {
-      hatPortrait ? (
-        <img src={siteConfig.portrait} alt={`Porträt von ${siteConfig.name}`} width="320" height="320" />
-      ) : (
-        <span class="initialen">RS</span>
-      )
-    }
-  </div>
-</section>
+  </Panel>
+  <Panel titel={hatPortrait ? siteConfig.portrait.replace(/^\//, "") : "portrait"} class="portrait-panel" padding={false}>
+    <div class="portrait" aria-hidden={hatPortrait ? undefined : "true"}>
+      {
+        hatPortrait ? (
+          <img src={siteConfig.portrait} alt={`Porträt von ${siteConfig.name}`} width="320" height="320" />
+        ) : (
+          <span class="initialen">RS</span>
+        )
+      }
+    </div>
+  </Panel>
+</div>
 
 <style>
   .hero {
     display: grid;
-    gap: 2rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    align-items: center;
+    gap: 1rem;
   }
   @media (min-width: 48rem) {
     .hero {
-      grid-template-columns: 1fr 16rem;
-      gap: 4rem;
-      padding-top: 5rem;
-      padding-bottom: 4rem;
+      grid-template-columns: 1fr 17rem;
+    }
+  }
+  .hero :global(.profil-panel .panel__body) {
+    padding: 1.5rem 1.5rem 1.75rem;
+  }
+  @media (min-width: 48rem) {
+    .hero :global(.profil-panel .panel__body) {
+      padding: 2.25rem 2.5rem 2.5rem;
     }
   }
   h1 {
@@ -60,7 +65,7 @@ const hatPortrait = existsSync(join(process.cwd(), "public", siteConfig.portrait
     margin: 0 0 1.5rem;
   }
   .profil {
-    max-width: 38rem;
+    max-width: 40rem;
     margin: 0 0 1rem;
     color: var(--ink);
   }
@@ -72,27 +77,55 @@ const hatPortrait = existsSync(join(process.cwd(), "public", siteConfig.portrait
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .portrait {
+  /* Auf dem Handy steht das Porträt klein über dem Profil */
+  .hero :global(.portrait-panel) {
     order: -1;
-    width: 7rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    overflow: hidden;
-    background: var(--accent-soft);
+    justify-self: start;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero :global(.portrait-panel > div:last-child) {
+    flex: 1;
     display: grid;
     place-items: center;
-    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+  }
+  @media (min-width: 48rem) {
+    .hero :global(.portrait-panel) {
+      order: 0;
+      justify-self: stretch;
+    }
+    .hero :global(.portrait-panel > div:last-child) {
+      padding: 1.5rem;
+    }
+  }
+  /* Rundes Porträt mit einem Ring in den drei Kontextfarben */
+  .portrait {
+    width: 7rem;
+    aspect-ratio: 1;
+    padding: 3px;
+    border-radius: 50%;
+    background: conic-gradient(from 200deg, var(--c-beruf), var(--c-studium), var(--c-privat), var(--c-beruf));
   }
   @media (min-width: 48rem) {
     .portrait {
-      order: 0;
       width: 100%;
+      max-width: 13rem;
     }
   }
-  .portrait img {
+  .portrait > * {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
+    border: 3px solid var(--surface);
+    background: var(--accent-soft);
+  }
+  .portrait img {
     object-fit: cover;
+  }
+  .portrait span {
+    display: grid;
+    place-items: center;
   }
   .initialen {
     font-family: var(--serif);

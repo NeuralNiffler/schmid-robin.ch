@@ -20,8 +20,8 @@ const { Content } = await render(projekt);
 ---
 
 <Base title={titel} description={kurz}>
-  <article class="projekt container">
-    <a class="zurueck" href="/#projekte">← Alle Projekte</a>
+  <article class="projekt container" data-kontext={kontext}>
+    <a class="zurueck mono" href="/#projekte">← alle projekte</a>
     <header>
       <p class="meta"><span class="badge">{kontext}</span> <span>{zeitraum}</span></p>
       <h1>{titel}</h1>
@@ -88,7 +88,7 @@ const { Content } = await render(projekt);
   .zurueck {
     display: inline-block;
     margin-bottom: 2rem;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     text-decoration: none;
   }
   .meta {
@@ -125,22 +125,31 @@ const { Content } = await render(projekt);
     border-radius: var(--radius);
     border: 1px solid var(--line);
   }
+  .projekt :global(.pipeline) {
+    background: var(--surface);
+  }
   .eckdaten {
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
     margin: 2.5rem 0 0;
-    padding: 1.5rem;
+  }
+  @media (min-width: 40rem) {
+    .eckdaten {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .eckdaten > div {
     background: var(--surface);
     border: 1px solid var(--line);
+    border-top: 3px solid var(--k);
     border-radius: var(--radius);
+    padding: 1rem 1.25rem 1.25rem;
   }
   dt {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
   }
   dd {
     margin: 0;

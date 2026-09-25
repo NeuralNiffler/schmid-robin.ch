@@ -1,0 +1,61 @@
+---
+import { beruf, zeitraum } from "../../data/werdegang";
+import { siteConfig } from "../../site.config";
+import Panel from "./Panel.astro";
+---
+
+<Panel titel="werdegang.log" class="werdegang-log">
+  <ol class="details">
+    {
+      beruf.map((b) => (
+        <li data-kontext={b.kontext}>
+          <span class="zeit mono">{zeitraum(b)}</span>
+          <div>
+            <strong>{b.titel}</strong>, {b.ort}
+            <p>{b.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="linkedin">
+    Den vollständigen Werdegang gibt es auf <a href={siteConfig.links.linkedin} target="_blank" rel="me noopener">LinkedIn</a>.
+  </p>
+</Panel>
+
+<style>
+  .details {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .details li {
+    display: grid;
+    gap: 0.25rem;
+    padding-left: 0.875rem;
+    border-left: 3px solid var(--k);
+  }
+  @media (min-width: 56rem) {
+    .details {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+  .zeit {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  .details p {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+  .linkedin {
+    margin: 1.5rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+</style>
