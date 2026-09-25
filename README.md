@@ -38,5 +38,5 @@ npm run build    # statische Seite nach ./dist/
 
 1. **GitHub:** Repository `NeuralNiffler/schmid-robin.ch` anlegen und pushen.
 2. **Domain:** In Cloudflare `schmid-robin.ch` als Website hinzufügen und die Nameserver bei hosttech auf die von Cloudflare angezeigten umstellen.
-3. **Deploy:** In Cloudflare unter Workers & Pages ein Projekt aus dem GitHub-Repo erstellen. Der Projektname muss `schmid-robin-ch` sein (wie in `wrangler.jsonc`). Build-Befehl `npm run build`, Deploy-Befehl `npx wrangler deploy`. Die Custom Domain legt Wrangler über die Route in `wrangler.jsonc` selbst an.
+3. **Deploy:** In Cloudflare unter Workers & Pages ein Projekt aus dem GitHub-Repo erstellen. Der Projektname muss `schmid-robin-ch` sein (wie in `wrangler.jsonc`). Build-Befehl `npm run build`, Deploy-Befehl `npx wrangler deploy`. Die Custom Domains `schmid-robin.ch` und `www.schmid-robin.ch` legt Wrangler über die Routen in `wrangler.jsonc` selbst an. Vorher die alten A- und AAAA-Einträge von hosttech löschen (`*`, Hauptdomain, `www`). `www` leitet `worker/index.js` per 301 auf die Hauptdomain um.
 4. **E-Mail:** Unter Email Routing die Adresse `kontakt@schmid-robin.ch` anlegen und an die private Adresse weiterleiten. Die Zieladresse muss einmal bestätigt werden.
