@@ -1,10 +1,12 @@
 ---
 import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { siteConfig } from "../site.config";
 
 const { email, linkedin, github } = siteConfig.links;
-// Foto ist optional: Wird public/portrait.jpg abgelegt, erscheint es automatisch.
-const hatPortrait = existsSync(new URL(`../../public${siteConfig.portrait}`, import.meta.url));
+// Foto ist optional: Liegt die Datei aus siteConfig.portrait in public/, erscheint sie automatisch.
+// Pfad vom Projektverzeichnis aus, weil import.meta.url beim Build auf einen Zwischenordner zeigt.
+const hatPortrait = existsSync(join(process.cwd(), "public", siteConfig.portrait));
 ---
 
 <section class="hero container">
