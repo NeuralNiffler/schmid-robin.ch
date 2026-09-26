@@ -9,17 +9,16 @@ export const familien: Record<string, string[]> = {
   R: ["R", "tidyverse", "renv", "Quarto", "Shiny", "dplyr", "openxlsx"],
   "SQL (MySQL, Oracle)": ["SQL", "SQLite", "MySQL", "Oracle"],
   "Java / Spring Boot": ["Java / Spring Boot", "Java", "Spring Boot"],
-  Angular: ["Angular"],
   "ERP (Navision, BC365)": ["Business Central", "Navision"],
-  "Schnittstellen (REST)": ["REST-API"],
-  "Web (Astro, TypeScript)": ["Astro", "TypeScript", "Zod"],
+  Schnittstellen: ["Schnittstellen", "REST-API"],
+  "TypeScript, Angular": ["TypeScript", "Angular", "Astro", "Zod"],
   "Cloudflare, CI/CD": ["Cloudflare Workers", "Email Routing", "GitHub Actions"],
-  "Claude / KI": ["Claude API", "Claude Cowork", "Claude Code"],
-  "Jira, Slack, Gmail": ["Jira", "Slack", "Gmail"],
+  "Claude / KI": ["Claude", "Claude API", "Claude Cowork", "Claude Code"],
+  "Jira, Slack": ["Jira", "Slack"],
 };
 
 /** Formate statt Technologien: stehen auf den Projektkarten, zählen aber nicht im Diagramm. */
-export const ignoriert = new Set(["Markdown"]);
+export const ignoriert = new Set(["Markdown", "Gmail"]);
 
 /**
  * Vorhaben ohne eigene Projektkarte, die trotzdem ins Technologie-Diagramm einfliessen.

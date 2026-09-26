@@ -34,7 +34,7 @@ export const beruf: Station[] = [
     ort: "Carvolution",
     kontext: "Beruf",
     text: "Java/Spring Boot, Angular und SQL am Kernsystem. Architektur, Schnittstellen und Datenflüsse zwischen Drittsystemen und dem eigenen ERP-ähnlichen System.",
-    stack: ["Java / Spring Boot", "Angular", "SQL", "Navision"],
+    stack: ["Java / Spring Boot", "Angular", "SQL", "Navision", "Schnittstellen"],
   },
   {
     von: 2017,
@@ -43,12 +43,13 @@ export const beruf: Station[] = [
     ort: "Basler Kantonalbank",
     kontext: "Beruf",
     text: "Analyse und Bereitstellung strukturierter Daten für fachspezifische Reports im Finanzumfeld.",
+    stack: ["Schnittstellen"],
   },
 ];
 
 export const ausbildung: Station[] = [
-  { von: 2025, bis: null, titel: "Studium BSc Data Science & AI", ort: "FHNW", kontext: "Studium" },
-  { von: 2014, bis: 2017, titel: "BSc Wirtschaftsinformatik", ort: "FHNW", kontext: "Studium" },
+  { von: 2025, bis: null, titel: "Studium BSc Data Science & AI", ort: "FHNW", kontext: "Studium", stack: ["SQL", "Claude"] },
+  { von: 2014, bis: 2017, titel: "BSc Wirtschaftsinformatik", ort: "FHNW", kontext: "Studium", stack: ["SQL"] },
   { von: 2019, bis: 2019, titel: "Professional Scrum Master (PSM I)", ort: "Scrum.org", kontext: "Studium", meilenstein: true },
 ];
 

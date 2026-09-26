@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import { beruf, type Kontext } from "./data/werdegang";
+import { ausbildung, beruf, type Kontext } from "./data/werdegang";
 import { familieVon, ignoriert, weitereVorhaben } from "./data/technologien";
 import { siteConfig } from "./site.config";
 
@@ -33,13 +33,13 @@ export function getKennzahlen(projekte: Projekt[]) {
 }
 
 /**
- * Technologie-Familien nach Häufigkeit: gezählt wird, in wie vielen Projekten, Berufsstationen und weiteren Vorhaben
+ * Technologie-Familien nach Häufigkeit: gezählt wird, in wie vielen Projekten, Stationen aus Beruf und Ausbildung und weiteren Vorhaben
  * eine Familie vorkommt (je Eintrag höchstens einmal), aufgeteilt nach Kontext.
  */
 export function getTechnologien(projekte: Projekt[], anzahl = 10) {
   const eintraege = [
     ...projekte.map((p) => ({ kontext: p.data.kontext, stack: p.data.stack })),
-    ...beruf.map((b) => ({ kontext: b.kontext, stack: b.stack ?? [] })),
+    ...[...beruf, ...ausbildung].map((s) => ({ kontext: s.kontext, stack: s.stack ?? [] })),
     ...weitereVorhaben,
   ].map((e) => ({ ...e, stack: e.stack.filter((t) => !ignoriert.has(t)) }));
   const zaehler = new Map<string, { jeKontext: Record<Kontext, number>; tools: Set<string> }>();

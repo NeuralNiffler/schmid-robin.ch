@@ -14,7 +14,7 @@ const max = Math.max(...daten.map((d) => d.total));
 
 <Panel titel="technologien.häufigkeit" class="stack">
   <h2 class="titel">Meistgenutzte Technologien</h2>
-  <p class="sub">Anzahl Berufsstationen und Projekte, in denen eine Technologie vorkommt</p>
+  <p class="sub">Anzahl Stationen in Beruf und Studium sowie Projekte, in denen eine Technologie vorkommt</p>
   <Legende />
   <ol class="balken">
     {
@@ -41,7 +41,7 @@ const max = Math.max(...daten.map((d) => d.total));
     }
   </ol>
   <table class="visually-hidden">
-    <caption>Technologien nach Anzahl Berufsstationen und Projekte, je Kontext</caption>
+    <caption>Technologien nach Anzahl Stationen und Projekte, je Kontext</caption>
     <thead>
       <tr><th>Technologie</th>{kontexte.map((k) => <th>{k}</th>)}<th>Total</th></tr>
     </thead>
