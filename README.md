@@ -21,7 +21,7 @@ Die Reihenfolge ergibt sich aus `featured` (zuerst) und `order` (kleiner = weite
 
 - Name, Positionierung, Profiltext und Links: `src/site.config.ts`
 - Werdegang: `src/components/Werdegang.astro`
-- Diagramme für Projekte ohne Bild: `src/components/Diagramm.astro`
+- Diagramme für Projekte (optional zusätzlich zum Bild): `src/components/Diagramm.astro`
 
 Schreibweise: Schweizer Deutsch (ss statt Eszett), keine Gedankenstriche im Fliesstext, zeitlos formuliert (kein "aktuell", keine Verfügbarkeit).
 

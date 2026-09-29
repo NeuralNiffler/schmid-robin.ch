@@ -42,7 +42,7 @@ const { Content } = await render(projekt);
     </header>
 
     {bild && <img class="bild" src={bild} alt={bildAlt ?? ""} width="1200" height="675" />}
-    {!bild && diagramm && <div class="diagramm"><Diagramm name={diagramm} /></div>}
+    {diagramm && <div class="diagramm"><Diagramm name={diagramm} /></div>}
 
     <dl class="eckdaten">
       <div>

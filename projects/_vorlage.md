@@ -23,7 +23,7 @@ links:
 # Optional. Bild in public/projects/ ablegen, dann hier den Pfad eintragen.
 # bild: "/projects/mein-projekt.png"
 # bildAlt: "Kurze Beschreibung des Bildes"
-# Optional, statt Bild: eingebautes Diagramm (5000ratshuus, bc365, cowork).
+# Optional, zusätzlich oder statt Bild: eingebautes Diagramm (5000ratshuus, bc365, cowork).
 # diagramm: "cowork"
 # Kleinere Zahl = weiter vorne.
 order: 99
