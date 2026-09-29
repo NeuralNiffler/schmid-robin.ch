@@ -22,13 +22,15 @@ const href = `/projekte/${projekt.id}/`;
   <div class="body">
     <h3><a href={href}>{titel}</a></h3>
     <p class="kurz">{kurz}</p>
-    {
-      bild ? (
-        <img class="bild" src={bild} alt={bildAlt ?? ""} loading="lazy" decoding="async" width="800" height="450" />
-      ) : (
-        diagramm && <Diagramm name={diagramm} kompakt />
-      )
-    }
+    <div class="medium">
+      {
+        bild ? (
+          <img class="bild" src={bild} alt={bildAlt ?? ""} loading="lazy" decoding="async" width="800" height="450" />
+        ) : (
+          diagramm && <Diagramm name={diagramm} kompakt />
+        )
+      }
+    </div>
     <ul class="tags" aria-label="Stack">
       {stack.map((s) => <li>{s}</li>)}
     </ul>
@@ -39,9 +41,11 @@ const href = `/projekte/${projekt.id}/`;
 <style>
   .card {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    /* Zeilen mit den Nachbarkarten teilen, damit Bild/Diagramm fluchten */
+    display: grid;
+    grid-row: span 6;
+    grid-template-rows: subgrid;
+    row-gap: 0;
     background: var(--surface);
     border: 1px solid var(--line);
     border-top: 3px solid var(--k);
@@ -83,11 +87,14 @@ const href = `/projekte/${projekt.id}/`;
     border-radius: var(--radius);
   }
   .body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    row-gap: 0.75rem;
     padding: 1.25rem;
-    flex: 1;
+  }
+  .medium {
+    align-self: start;
   }
   h3 {
     margin: 0;
@@ -111,7 +118,8 @@ const href = `/projekte/${projekt.id}/`;
     color: var(--muted);
   }
   .tags {
-    margin-top: auto;
+    /* nicht auf Zeilenhöhe strecken, sonst blähen sich die Tags auf */
+    align-self: start;
     padding-top: 0.25rem;
   }
   .mehr {
