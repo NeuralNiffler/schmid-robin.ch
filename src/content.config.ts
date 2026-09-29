@@ -20,7 +20,7 @@ const projects = defineCollection({
     links: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
     bild: z.string().startsWith("/projects/").optional(),
     bildAlt: z.string().optional(),
-    diagramm: z.enum(["5000ratshuus", "bc365", "cowork"]).optional(),
+    diagramm: z.enum(["5000ratshuus", "bc365", "cowork", "shiny", "bfs", "adbrief"]).optional(),
     order: z.number(),
     featured: z.boolean().default(false),
   }),

@@ -15,6 +15,7 @@ stack:
 links:
   - label: "Repository"
     url: "https://github.com/NeuralNiffler/prr_dashboard"
+diagramm: "shiny"
 order: 4
 featured: false
 ---

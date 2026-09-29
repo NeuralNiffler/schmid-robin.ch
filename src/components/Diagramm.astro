@@ -2,7 +2,8 @@
 import Pipeline from "./diagramme/Pipeline.astro";
 
 interface Props {
-  name: "5000ratshuus" | "bc365" | "cowork";
+  name: "5000ratshuus" | "bc365" | "cowork" | "shiny" | "bfs" | "adbrief";
+  kompakt?: boolean;
 }
 
 /**
@@ -36,9 +37,36 @@ const schemas = {
       { titel: "Vorschlag", text: "Buchung pro Ticket" },
     ],
   },
+  shiny: {
+    titel: "Von den OWID-Daten zur Shiny-App",
+    stufen: [
+      { titel: "Our World in Data", text: "Schuljahre, BIP, Lebenserwartung" },
+      { titel: "Aufbereitung", text: "Quarto und tidyverse" },
+      { titel: "Analyse", text: "Korrelationen 2011–2023" },
+      { titel: "Shiny-App", text: "interaktive Exploration" },
+    ],
+  },
+  bfs: {
+    titel: "Von den BFS-Rohdaten zu den finalen Grafiken",
+    stufen: [
+      { titel: "BFS-Daten", text: "Strukturerhebung 2010–2022, Volkszählung" },
+      { titel: "Preprocessing", text: "R-Skripte in Folge, je ein .rds" },
+      { titel: "Anreicherung", text: "Gemeindetyp und Sprachregion" },
+      { titel: "Final Plots", text: "R Markdown, Abschlussgrafiken" },
+    ],
+  },
+  adbrief: {
+    titel: "Von den Rohdaten zum Report",
+    stufen: [
+      { titel: "Input", text: "Excel oder JSON" },
+      { titel: "Einlesen", text: "einheitliche Struktur" },
+      { titel: "Kennzahlen", text: "z. B. Kosten pro Klick" },
+      { titel: "HTML-Report", text: "gerendert mit Quarto" },
+    ],
+  },
 } as const;
 
 const schema = schemas[Astro.props.name];
 ---
 
-<Pipeline titel={schema.titel} stufen={schema.stufen} />
+<Pipeline titel={schema.titel} stufen={schema.stufen} kompakt={Astro.props.kompakt} />

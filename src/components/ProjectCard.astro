@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import Diagramm from "./Diagramm.astro";
 
 interface Props {
   projekt: CollectionEntry<"projects">;
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const { projekt, nr } = Astro.props;
-const { titel, kurz, kontext, zeitraum, stack, bild, bildAlt, featured } = projekt.data;
+const { titel, kurz, kontext, zeitraum, stack, bild, bildAlt, diagramm, featured } = projekt.data;
 const href = `/projekte/${projekt.id}/`;
 ---
 
@@ -18,14 +19,16 @@ const href = `/projekte/${projekt.id}/`;
     <span class="badge">{kontext}</span>
     <span class="zeitraum">{zeitraum}</span>
   </p>
-  {
-    bild && (
-      <img class="bild" src={bild} alt={bildAlt ?? ""} loading="lazy" decoding="async" width="800" height="450" />
-    )
-  }
   <div class="body">
     <h3><a href={href}>{titel}</a></h3>
     <p class="kurz">{kurz}</p>
+    {
+      bild ? (
+        <img class="bild" src={bild} alt={bildAlt ?? ""} loading="lazy" decoding="async" width="800" height="450" />
+      ) : (
+        diagramm && <Diagramm name={diagramm} kompakt />
+      )
+    }
     <ul class="tags" aria-label="Stack">
       {stack.map((s) => <li>{s}</li>)}
     </ul>
@@ -76,7 +79,8 @@ const href = `/projekte/${projekt.id}/`;
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-bottom: 1px solid var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
   }
   .body {
     display: flex;

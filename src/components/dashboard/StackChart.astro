@@ -40,15 +40,17 @@ const max = Math.max(...daten.map((d) => d.total));
       ))
     }
   </ol>
-  <table class="visually-hidden">
-    <caption>Technologien nach Anzahl Stationen und Projekte, je Kontext</caption>
-    <thead>
-      <tr><th>Technologie</th>{kontexte.map((k) => <th>{k}</th>)}<th>Total</th></tr>
-    </thead>
-    <tbody>
-      {daten.map((d) => <tr><th>{d.familie}</th>{kontexte.map((k) => <td>{d.jeKontext[k]}</td>)}<td>{d.total}</td></tr>)}
-    </tbody>
-  </table>
+  <div class="visually-hidden">
+    <table>
+      <caption>Technologien nach Anzahl Stationen und Projekte, je Kontext</caption>
+      <thead>
+        <tr><th>Technologie</th>{kontexte.map((k) => <th>{k}</th>)}<th>Total</th></tr>
+      </thead>
+      <tbody>
+        {daten.map((d) => <tr><th>{d.familie}</th>{kontexte.map((k) => <td>{d.jeKontext[k]}</td>)}<td>{d.total}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
 </Panel>
 
 <style>

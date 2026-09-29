@@ -10,6 +10,7 @@ stack:
   - "R"
   - "tidyverse"
   - "renv"
+diagramm: "bfs"
 order: 5
 featured: false
 ---

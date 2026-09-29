@@ -14,6 +14,7 @@ stack:
 links:
   - label: "Repository"
     url: "https://github.com/NeuralNiffler/AdBrief"
+diagramm: "adbrief"
 order: 6
 featured: false
 ---

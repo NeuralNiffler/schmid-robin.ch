@@ -2,12 +2,14 @@
 interface Props {
   titel: string;
   stufen: readonly { titel: string; text: string }[];
+  /** Schmale Variante für die Projektkarten: Stufen immer untereinander, je eine Zeile. */
+  kompakt?: boolean;
 }
 
-const { titel, stufen } = Astro.props;
+const { titel, stufen, kompakt = false } = Astro.props;
 ---
 
-<figure class="pipeline">
+<figure class:list={["pipeline", { kompakt }]}>
   <ol>
     {
       stufen.map((stufe, i) => (
@@ -93,5 +95,42 @@ const { titel, stufen } = Astro.props;
     font-family: var(--mono);
     font-size: 0.8125rem;
     color: var(--muted);
+  }
+
+  .kompakt {
+    padding: 0.875rem;
+  }
+  .kompakt ol {
+    grid-auto-flow: row;
+    gap: 0.875rem;
+  }
+  .kompakt li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.3125rem 0.625rem;
+    border-top: 1px solid var(--line);
+    border-left: 3px solid var(--k, var(--accent));
+  }
+  .kompakt li:not(:last-child)::after {
+    content: "↓";
+    left: 1.25rem;
+    right: auto;
+    top: auto;
+    bottom: -0.875rem;
+    transform: none;
+    font-size: 0.75rem;
+    line-height: 0.875rem;
+  }
+  .kompakt strong {
+    font-size: 0.9375rem;
+  }
+  /* Nur Stufentitel: die Detailzeile hat in der Karte keinen Platz */
+  .kompakt .text {
+    display: none;
+  }
+  .kompakt figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
   }
 </style>
