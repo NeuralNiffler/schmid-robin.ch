@@ -11,6 +11,8 @@ stack:
   - "tidyverse"
   - "renv"
 diagramm: "bfs"
+bild: "/projects/bfs-strukturerhebung_16x9.png"
+bildAlt: "Analyse der BFS Strukturerhebungsdaten über mehrere Jahre"
 order: 5
 featured: false
 ---

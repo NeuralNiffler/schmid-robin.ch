@@ -16,6 +16,8 @@ links:
   - label: "Repository"
     url: "https://github.com/NeuralNiffler/prr_dashboard"
 diagramm: "shiny"
+bild: "/projects/shiny-dashboard_16x9.png"
+bildAlt: "Interaktives Dashboard das Korrelationen verschiedene Wohlstandsindikatoren visualisiert"
 order: 4
 featured: false
 ---

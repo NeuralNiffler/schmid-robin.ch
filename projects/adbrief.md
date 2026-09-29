@@ -15,6 +15,8 @@ links:
   - label: "Repository"
     url: "https://github.com/NeuralNiffler/AdBrief"
 diagramm: "adbrief"
+bild: "/projects/adbrief_16x9.png"
+bildAlt: "Marketing KPIs übersichtlich dargestellt"
 order: 6
 featured: false
 ---

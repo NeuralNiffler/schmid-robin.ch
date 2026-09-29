@@ -21,9 +21,9 @@ links:
   - label: "Repository"
     url: "https://github.com/NeuralNiffler/5000ratshuus.ch"
 diagramm: "5000ratshuus"
-order: 1
 bild: "/projects/5000ratshuus_16x9.png"
 bildAlt: "Kategorisierte Übersicht über die aktuellen Geschäfte der Stadt Aarau"
+order: 1
 featured: true
 ---
 

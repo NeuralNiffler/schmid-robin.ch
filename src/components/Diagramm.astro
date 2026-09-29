@@ -29,12 +29,12 @@ const schemas = {
     ],
   },
   cowork: {
-    titel: "Beispiel: Zeiterfassungsabgleich",
+    titel: "Beispiel: Arbeitszeit der Woche prüfen",
     stufen: [
-      { titel: "Quellen", text: "Slack, Gmail, Kalender" },
-      { titel: "Skill", text: "fasst Aktivitäten zusammen" },
-      { titel: "Abgleich", text: "mit Jira-Buchungen" },
-      { titel: "Vorschlag", text: "Buchung pro Ticket" },
+      { titel: "Auftrag", text: "«Prüf meine Zeiterfassung dieser Woche»" },
+      { titel: "Bereich", text: "Claude lädt die Regeln für Arbeit" },
+      { titel: "Skill", text: "holt Daten aus Jira, Slack und Kalender" },
+      { titel: "Vorschlag", text: "Prüfen und erfassen / korrigieren" },
     ],
   },
   shiny: {
@@ -49,7 +49,7 @@ const schemas = {
   bfs: {
     titel: "Von den BFS-Rohdaten zu den finalen Grafiken",
     stufen: [
-      { titel: "BFS-Daten", text: "Strukturerhebung 2010–2022, Volkszählung" },
+      { titel: "BFS-Daten", text: "Strukturerhebung 2010–2022" },
       { titel: "Preprocessing", text: "R-Skripte in Folge, je ein .rds" },
       { titel: "Anreicherung", text: "Gemeindetyp und Sprachregion" },
       { titel: "Final Plots", text: "R Markdown, Abschlussgrafiken" },
