@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import Panel from "../components/dashboard/Panel.astro";
 import Kpi from "../components/dashboard/Kpi.astro";
 import Gantt from "../components/dashboard/Gantt.astro";
 import StackChart from "../components/dashboard/StackChart.astro";
@@ -20,9 +21,11 @@ const filter = [
   <div class="dashboard container">
     <Hero />
 
-    <section class="kpis" aria-label="Kennzahlen">
-      {kennzahlen.map((k) => <Kpi {...k} />)}
-    </section>
+    <Panel titel="kennzahlen.kpi" class="kpis">
+      <div class="kpi-grid">
+        {kennzahlen.map((k) => <Kpi {...k} />)}
+      </div>
+    </Panel>
 
     <div class="charts">
       <Gantt />
@@ -92,13 +95,17 @@ const filter = [
       padding-top: 2rem;
     }
   }
-  .kpis {
+  .kpi-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+  /* Kacheln etwas dunkler als das Panel, damit sie sich vom Hintergrund abheben */
+  .kpi-grid > :global(.kpi) {
+    background: var(--bg);
+  }
   @media (min-width: 56rem) {
-    .kpis {
+    .kpi-grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
