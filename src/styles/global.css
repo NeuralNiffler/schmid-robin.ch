@@ -1,39 +1,22 @@
 :root {
-  --bg: #faf9f6;
-  --surface: #ffffff;
-  --ink: #1c1f23;
-  --muted: #5b6168;
-  --line: #e3e1db;
-  --accent: #1f5f6b;
-  --accent-soft: #e5eff0;
+  --bg: #14171a;
+  --surface: #1b1f23;
+  --ink: #e8e6e1;
+  --muted: #a2a8ae;
+  --line: #2d3237;
+  --accent: #7fbfc9;
+  --accent-soft: #1f2d31;
   /* Kategorische Palette, eine Farbe je Kontext. Validiert (Kontrast, Farbenblindheit) gegen --surface. */
-  --c-beruf: #00829b;
-  --c-studium: #6b4fd1;
-  --c-privat: #e0663a;
-  --grid-dot: #e6e3dc;
+  --c-beruf: #1b9bb2;
+  --c-studium: #8f78ea;
+  --c-privat: #e06e40;
+  --grid-dot: #23282d;
   --radius: 10px;
   --serif: "Source Serif 4", Georgia, serif;
   --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --maxw: 72rem;
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14171a;
-    --surface: #1b1f23;
-    --ink: #e8e6e1;
-    --muted: #a2a8ae;
-    --line: #2d3237;
-    --accent: #7fbfc9;
-    --accent-soft: #1f2d31;
-    --c-beruf: #1b9bb2;
-    --c-studium: #8f78ea;
-    --c-privat: #e06e40;
-    --grid-dot: #23282d;
-    color-scheme: dark;
-  }
+  color-scheme: dark;
 }
 
 *,
