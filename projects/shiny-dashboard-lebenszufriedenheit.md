@@ -18,7 +18,7 @@ links:
 diagramm: "shiny"
 bild: "/projects/shiny-dashboard_16x9.png"
 bildAlt: "Interaktives Dashboard das Korrelationen verschiedene Wohlstandsindikatoren visualisiert"
-order: 4
+order: 7
 featured: false
 ---
 

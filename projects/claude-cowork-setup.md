@@ -14,7 +14,7 @@ stack:
   - "Slack"
   - "Gmail"
 diagramm: "cowork"
-order: 3
+order: 6
 featured: false
 ---
 

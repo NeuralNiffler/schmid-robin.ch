@@ -17,7 +17,7 @@ links:
 diagramm: "adbrief"
 bild: "/projects/adbrief_16x9.png"
 bildAlt: "Marketing KPIs übersichtlich dargestellt"
-order: 6
+order: 9
 featured: false
 ---
 

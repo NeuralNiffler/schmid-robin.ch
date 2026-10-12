@@ -2,7 +2,7 @@
 import Pipeline from "./diagramme/Pipeline.astro";
 
 interface Props {
-  name: "5000ratshuus" | "bc365" | "cowork" | "shiny" | "bfs" | "adbrief";
+  name: "5000ratshuus" | "bc365" | "abschluss" | "ktr" | "pricing" | "cowork" | "shiny" | "bfs" | "adbrief";
   kompakt?: boolean;
 }
 
@@ -26,6 +26,32 @@ const schemas = {
       { titel: "Kernsystem", text: "eigenes ERP-nahes System" },
       { titel: "Schnittstelle", text: "XML-Files → REST-API" },
       { titel: "Buchhaltung", text: "Navision on-prem → BC365 SaaS" },
+    ],
+  },
+  abschluss: {
+    titel: "Abschlussrechnung: von 7 auf 2 Tage",
+    stufen: [
+      { titel: "Spezialisten", text: "Positionen bei Aboende" },
+      { titel: "Kernsystem", text: "erfasst und prüft die Positionen" },
+      { titel: "REST-API", text: "Übergabe ohne Umweg über Finanzen" },
+      { titel: "Business Central", text: "Rechnung direkt gedruckt" },
+    ],
+  },
+  ktr: {
+    titel: "Kostenträgerrechnung pro Fahrzeug",
+    stufen: [
+      { titel: "Kosten", text: "Einkauf, Wartung, Schäden, Versicherung" },
+      { titel: "Kostenträger", text: "das einzelne Fahrzeug" },
+      { titel: "Erträge", text: "Abo-Einnahmen und Restwert" },
+      { titel: "Ergebnis", text: "Profitabilität pro Fahrzeug" },
+    ],
+  },
+  pricing: {
+    titel: "Vom Fixpaket zum Abo mit Optionen",
+    stufen: [
+      { titel: "Basispreis", text: "pro Fahrzeug" },
+      { titel: "Optionen", text: "Kilometer, Laufzeit, Versicherung" },
+      { titel: "Abopreis", text: "aus Basis und gewählten Optionen" },
     ],
   },
   cowork: {
